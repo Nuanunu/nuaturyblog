@@ -82,10 +82,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h2 id="title：关于QC-page1"><a href="#title：关于QC-page1" class="headerlink" title="title：关于QC-page1"></a>title：关于QC-page1</h2><p>在这篇文章里我会简要探讨关于QC的写法以及每个函数的作用。</p>
-<p>#QC的函数分类#</p>
-<p>##QC实例文件##</p>
-<blockquote>
+<h2 id="关于QC-page1"><a href="#关于QC-page1" class="headerlink" title="关于QC-page1"></a>关于QC-page1</h2><p>在这篇文章里我会简要探讨关于QC的写法以及每个函数的作用。</p>
+<h1 id="QC的函数分类"><a href="#QC的函数分类" class="headerlink" title="QC的函数分类"></a>QC的函数分类</h1><h2 id="QC实例文件"><a href="#QC实例文件" class="headerlink" title="QC实例文件"></a>QC实例文件</h2><blockquote>
 <p>QC Example<br>Here is a very simple QC file for a solid model without any animation or special properties (click on each command for details): </p>
 </blockquote>
 <p>//下面是一个非常简单的QC文件，用于实体模型，没有任何动画或特殊属性(点击每个命令查看详细信息):</p>
@@ -97,8 +95,7 @@ $cdmaterials    &quot;models\props_sdk&quot;
 $sequence idle    &quot;myfirstmodel-ref.smd&quot; //不需要动画，所以重用参考网格
 $collisionmodel    &quot;myfirstmodel-phys.smd&quot; { $concave }
 </code></pre><hr>
-<p>##$body##</p>
-<p>$body</p>
+<h2 id="body"><a href="#body" class="headerlink" title="$body"></a>$body</h2><p>$body</p>
 <p>The QC command $body is used to add a reference mesh to a model. Without at least one $body the model will be invisible (exception: models with facial animation use $model instead).<br>Tip:Multiple reference meshes can be handled with a $bodygroup.</p>
 <p>//QC命令$body用于向模型添加参考网格。如果没有至少一个$body，模型将是不可见的(例外:具有面部动画的模型使用$model代替)。<br>提示:多个参考网格可以处理与一个$bodygroup。</p>
 <p>Syntax</p>
@@ -108,15 +105,13 @@ $collisionmodel    &quot;myfirstmodel-phys.smd&quot; { $concave }
 $cdmaterials        &quot;models/weapons/&quot;
 $body        shell    &quot;shell_ref.smd&quot;
 $sequence    idle    &quot;shell_idle.smd&quot;
-</code></pre><p>##$illumposition##</p>
-<p>$illumposition</p>
+</code></pre><h2 id="illumposition"><a href="#illumposition" class="headerlink" title="$illumposition"></a>$illumposition</h2><p>$illumposition</p>
 <p>Sets the illumination position of the model relative to the origin. By default the $illumposition is the center of the model geometry.<br>When illuminating an animated or moving model in the engine, the lighting calculations are only done for the two brightest light sources. All the other lights, as well as bounced light from the environment, go into a simple single cubemap. This is the position the model uses for that cubemap. </p>
 <p>You can optionally specify a bone name for the illum position. If you do, the position specified will be interpreted as being relative to the specified bone. </p>
 <p>//设置模型相对于原点的光照位置。默认情况下，$illumposition是模型几何图形的中心。<br>当照亮引擎中的动画或移动模型时，照明计算只对两个最亮的光源进行。所有其他的光，以及从环境反射的光，都进入一个简单的立方体地图。这是模型用于cubemap的位置。<br>您可以选择为illum位置指定一个bone名称。如果你这样做，指定的位置将被解释为相对于指定的骨骼。</p>
 <p>Syntax</p>
 <pre><code>$illumposition (x) (y) (z) [bone name]
-</code></pre><p>##$definebone##</p>
-<p>$definebone</p>
+</code></pre><h2 id="definebone"><a href="#definebone" class="headerlink" title="$definebone"></a>$definebone</h2><p>$definebone</p>
 <p>Defines a bone outside of any .smd source. This is useful when building animation only mdl’s that would otherwise optimize out all the bones since none of them are connected to any geometry or attachment points. You can get studiomdl to dump this out using the “-definebones” command line option. </p>
 <p>The (fixup) fields specify how the IK solver has rotated any of the bones to match the single X axis as the long axis requirement for all bones in an IK chain. All the source animations are resolved to match this new orientation.<br>$definebone can also be used to change the bone order of a model (for example, bone merging purposes), by specifying it before any model references and changing around the $definebone list order. </p>
 <p>This command is run before any $hierarchy commands. </p>
@@ -132,14 +127,12 @@ $sequence    idle    &quot;shell_idle.smd&quot;
 <p>//注意:<br>在开始之前，不要分离共享动画。在你开始之前，你需要把它们都保存在同一个。qc文件中，因为studiomdl会优化所有它认为没有动画效果的骨骼。</p>
 <p>反编译包含骨数据的mdl文件(而不是动画mdl)<br>将生成的qc文件放入…\用户名\sourcesdk\bin\orangebox\bin\ \<br>使用您喜欢的任何方法，使用以下参数运行studiomdl—definebones mdldecompile。qc &gt; sharedbones.qci。sharedbones。qci将在与studiomdl相同的文件夹中创建<br>sharedbones开放。</p>
 <p>并删除所有不以$definebone开头的行<br>GUIStudioMDL还可以用来生成$definebone数据，但是必须手工将数据放入文件中。要做到这一点，只需加载qc文件并勾选底部的“定义骨骼”复选框。警告:结果文本中可能会出现错误，但它们很容易被注意到并修复。</p>
-<p>##$staticprop##</p>
-<p>$staticprop</p>
+<h2 id="staticprop"><a href="#staticprop" class="headerlink" title="$staticprop"></a>$staticprop</h2><p>$staticprop</p>
 <p>The QC command $staticprop specifies that the model being compiled does not have any moving parts. Despite the name, it does not limit the model to use with prop_static.<br>The command: </p>
 <p>Removes all bones except the root. Obviously do not use for ragdolls or animated models.<br>Permits VRAD to use the object’s collision mesh to calculate lightmap shadows.<br>Performs several other complex optimisations.</p>
 <p>//QC命令$staticprop指定正在编译的模型没有任何活动部件。尽管名称不同，但它并不限制模型与prop_static一起使用。</p>
 <p>命令:<br>除去根以外的骨头。显然，不要使用布娃娃或动画模型。<br>允许VRAD使用对象的碰撞网格来计算光照映射阴影。<br>执行其他几个复杂优化。</p>
-<p>##$collisionmodel（在sfm中不必要）##</p>
-<p>$collisionmodel</p>
+<h2 id="collisionmodel（在sfm中不必要）"><a href="#collisionmodel（在sfm中不必要）" class="headerlink" title="$collisionmodel（在sfm中不必要）"></a>$collisionmodel（在sfm中不必要）</h2><p>$collisionmodel</p>
 <p>The QC command $collisionmodel is used to embed a static collision mesh in a model, for use in VPhysics calculations. Animated models (including one that will become ragdolls) should use $collisionjoints instead. </p>
 <p> Warning: Collision meshes should have extremely few polygons. See Collision mesh for<br> examples. </p>
 <p>Note:<br>For collision meshes modeled in XSI ModTool, ensure that none of the edges are marked as hard edges. Hard edges generate errors in the physbox smd.</p>
@@ -185,8 +178,7 @@ $sequence    idle    &quot;shell_idle.smd&quot;
     $mass 350.0
     $concave
 }
-</code></pre><p>##$Texture##</p>
-<p>$Texture</p>
+</code></pre><h2 id="Texture"><a href="#Texture" class="headerlink" title="$Texture"></a>$Texture</h2><p>$Texture</p>
 <p>创建一组模型上使用的替换材料。它用于为模型添加替代“皮肤”选项。<br>如果未$texturegroup指定，则模型的VMT必须是UV映射到参考.SMD 的纹理的名称。<br>该$texturegroup命令应该在.qc中的$ body之后。<br>基本语法</p>
 <pre><code>$ texturegroup “&lt;name&gt;”
 {
@@ -217,25 +209,21 @@ $sequence    idle    &quot;shell_idle.smd&quot;
 <p>皮肤选项还可以用来提供$bumpmap，$surfaceprop在每个模式等选项VMT。有关优化，另请参阅$ lod和LOD模型。</p>
 <p>所有替代VTF纹理应遵循相同的UV贴图布局。</p>
 <p>列表中的一个皮肤必须是SMD中的纹理名称。如果没有这个，皮肤将只使用SMD中的纹理名称，而不是列表中的纹理名称。</p>
-<p>##$hbox（在sfm中不必要）##</p>
-<pre><code>$hbox (group number) (bone name) (min x) (min y) (min z) (max x) (max y) (max z)
+<h2 id="hbox（在sfm中不必要）"><a href="#hbox（在sfm中不必要）" class="headerlink" title="$hbox（在sfm中不必要）"></a>$hbox（在sfm中不必要）</h2><pre><code>$hbox (group number) (bone name) (min x) (min y) (min z) (max x) (max y) (max z)
 </code></pre><p>Creates a hit box around a bone. These hitboxes are used by the AI for simple collisions, such as bullets. </p>
 <p>Running studiomdl with the -h option will print out all of the autogenerated hitboxes.<br>If any hitboxes are defined this way, autohitbox generation is disabled. </p>
 <p>//在骨头周围创建一个点击框。这些碰撞箱被AI用于简单的碰撞，比如子弹。</p>
 <p>运行带有-h选项的studiomdl将打印出所有自动生成的hitbox。</p>
 <p>如果以这种方式定义任何hitbox，则禁用自动生成hitbox。</p>
-<p>##$bbox（在sfm中不必要）##</p>
-<pre><code>$bbox (min x) (min y) (min z) (max x) (max y) (max z)
+<h2 id="bbox（在sfm中不必要）"><a href="#bbox（在sfm中不必要）" class="headerlink" title="$bbox（在sfm中不必要）"></a>$bbox（在sfm中不必要）</h2><pre><code>$bbox (min x) (min y) (min z) (max x) (max y) (max z)
 </code></pre><p>Creates an axis-aligned bounding box used by the AI to detect collisions with the world, mostly for movement purposes. </p>
 <p>This is also called the hull. </p>
 <p>//创建一个轴向对齐的边框框，用于AI检测与世界的碰撞，主要用于运动目的。<br>这也被称为船体。</p>
-<p>##$cbox（在sfm中不必要）##</p>
-<p>$cbox</p>
+<h2 id="cbox（在sfm中不必要）"><a href="#cbox（在sfm中不必要）" class="headerlink" title="$cbox（在sfm中不必要）"></a>$cbox（在sfm中不必要）</h2><p>$cbox</p>
 <p>Sets the collision box for the model. What these coordinates are relative/aligned to is currently not known? </p>
 <p>//设置模型的碰撞框。目前还不知道这些坐标相对于什么?<br>Syntax</p>
 <pre><code>$cbox &lt;float|minx&gt; &lt;float|miny&gt; &lt;float|minz&gt; &lt;float|maxx&gt; &lt;float|maxy&gt; &lt;float|maxz&gt; 
-</code></pre><p>##$contents（在sfm中不必要）##</p>
-<p>$contents</p>
+</code></pre><h2 id="contents（在sfm中不必要）"><a href="#contents（在sfm中不必要）" class="headerlink" title="$contents（在sfm中不必要）"></a>$contents（在sfm中不必要）</h2><p>$contents</p>
 <p>The QC command $contents specifies a list of the content_types to use for SolidMask tests during non-hitbox traces. </p>
 <p>This feature was specifically added to allow us to make things like fences out of props instead of brush models. </p>
 <p>See also $jointcontents.</p>
@@ -270,8 +258,7 @@ $sequence    idle    &quot;shell_idle.smd&quot;
 <p>Solid是默认值，因此这个参数通常只用于$jointcontents命令，用于生成非实体父级的实体子级。</p>
 <p>梯</p>
 <p>把它做成梯子。</p>
-<p>##$surfaceprop（在sfm中不必要）##</p>
-<p>$surfaceprop</p>
+<h2 id="surfaceprop（在sfm中不必要）"><a href="#surfaceprop（在sfm中不必要）" class="headerlink" title="$surfaceprop（在sfm中不必要）"></a>$surfaceprop（在sfm中不必要）</h2><p>$surfaceprop</p>
 <p>The $surfaceprop command links the surface of either a material or model to a set of physical properties, including: </p>
 <p>What sounds are emitted during collisions<br>What effects are emitted when the surface is shot<br>Mass, buoyancy, bounciness…</p>
 <p>The effect of the surface on nearby sounds (reverberation, echo, absorption…)</p>
@@ -304,7 +291,7 @@ $sequence    idle    &quot;shell_idle.smd&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://nuatury.tk/2019/02/06/About qc_1/" data-id="cjrstvd9y0003n0ua49iqcymg" class="article-share-link">Share</a>
+      <a data-url="http://nuatury.tk/2019/02/06/About qc_1/" data-id="cjrsu46n40003psuay4iu9jui" class="article-share-link">Share</a>
       
       
     </footer>
@@ -441,7 +428,7 @@ font-family: Verdana, Geneva, sans-serif;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://nuatury.tk/2019/01/23/iwandie/" data-id="cjrstvd8g0002n0uase5ujo7y" class="article-share-link">Share</a>
+      <a data-url="http://nuatury.tk/2019/01/23/iwandie/" data-id="cjrsu46ms0002psua38920ll5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -482,7 +469,7 @@ font-family: Verdana, Geneva, sans-serif;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://nuatury.tk/2019/01/23/new test 1/" data-id="cjrstvd870000n0uas05htfp8" class="article-share-link">Share</a>
+      <a data-url="http://nuatury.tk/2019/01/23/new test 1/" data-id="cjrsu46mj0001psua5fgeforg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -527,7 +514,7 @@ font-family: Verdana, Geneva, sans-serif;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://nuatury.tk/2019/01/23/hello-world/" data-id="cjrstvd8e0001n0ua7vizf8d1" class="article-share-link">Share</a>
+      <a data-url="http://nuatury.tk/2019/01/23/hello-world/" data-id="cjrsu46ma0000psua4965vd3f" class="article-share-link">Share</a>
       
       
     </footer>
